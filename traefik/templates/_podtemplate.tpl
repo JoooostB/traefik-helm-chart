@@ -311,56 +311,56 @@
            {{- if semverCompare "<3.0.0-0" (include "imageVersion" $) }}
              {{- fail "ERROR: OpenTelemetry features are only available on Traefik v3. Please set `image.tag` to `v3.x`." }}
            {{- end }}
-          - "--metrics.openTelemetry=true"
-          - "--metrics.openTelemetry.address={{ .address }}"
+          - "--metrics.otlp=true"
+          - "--metrics.otlp.address={{ .address }}"
            {{- if ne .addEntryPointsLabels nil }}
             {{- with .addEntryPointsLabels | toString }}
-          - "--metrics.openTelemetry.addEntryPointsLabels={{ . }}"
+          - "--metrics.otlp.addEntryPointsLabels={{ . }}"
             {{- end }}
            {{- end }}
            {{- if ne .addRoutersLabels nil }}
             {{- with .addRoutersLabels | toString }}
-          - "--metrics.openTelemetry.addRoutersLabels={{ . }}"
+          - "--metrics.otlp.addRoutersLabels={{ . }}"
             {{- end }}
            {{- end }}
            {{- if ne .addServicesLabels nil }}
             {{- with .addServicesLabels | toString }}
-          - "--metrics.openTelemetry.addServicesLabels={{ . }}"
+          - "--metrics.otlp.addServicesLabels={{ . }}"
             {{- end }}
            {{- end }}
            {{- with .explicitBoundaries }}
-          - "--metrics.openTelemetry.explicitBoundaries={{ join "," . }}"
+          - "--metrics.otlp.explicitBoundaries={{ join "," . }}"
            {{- end }}
            {{- with .headers }}
             {{- range $name, $value := . }}
-          - "--metrics.openTelemetry.headers.{{ $name }}={{ $value }}"
+          - "--metrics.otlp.headers.{{ $name }}={{ $value }}"
             {{- end }}
            {{- end }}
            {{- with .insecure }}
-          - "--metrics.openTelemetry.insecure={{ . }}"
+          - "--metrics.otlp.insecure={{ . }}"
            {{- end }}
            {{- with .pushInterval }}
-          - "--metrics.openTelemetry.pushInterval={{ . }}"
+          - "--metrics.otlp.pushInterval={{ . }}"
            {{- end }}
            {{- with .path }}
-          - "--metrics.openTelemetry.path={{ . }}"
+          - "--metrics.otlp.path={{ . }}"
            {{- end }}
            {{- with .tls }}
             {{- with .ca }}
-          - "--metrics.openTelemetry.tls.ca={{ . }}"
+          - "--metrics.otlp.tls.ca={{ . }}"
             {{- end }}
             {{- with .cert }}
-          - "--metrics.openTelemetry.tls.cert={{ . }}"
+          - "--metrics.otlp.tls.cert={{ . }}"
             {{- end }}
             {{- with .key }}
-          - "--metrics.openTelemetry.tls.key={{ . }}"
+          - "--metrics.otlp.tls.key={{ . }}"
             {{- end }}
             {{- with .insecureSkipVerify }}
-          - "--metrics.openTelemetry.tls.insecureSkipVerify={{ . }}"
+          - "--metrics.otlp.tls.insecureSkipVerify={{ . }}"
             {{- end }}
            {{- end }}
            {{- with .grpc }}
-          - "--metrics.openTelemetry.grpc={{ . }}"
+          - "--metrics.otlp.grpc={{ . }}"
            {{- end }}
           {{- end }}
 
@@ -370,33 +370,33 @@
            {{- if semverCompare "<3.0.0-0" (include "imageVersion" $) }}
              {{- fail "ERROR: OpenTelemetry features are only available on Traefik v3. Please set `image.tag` to `v3.x`." }}
            {{- end }}
-          - "--tracing.openTelemetry=true"
-          - "--tracing.openTelemetry.address={{ required "ERROR: When enabling openTelemetry on tracing, `tracing.openTelemetry.address` is required." .Values.tracing.openTelemetry.address }}"
+          - "--tracing.otlp=true"
+          - "--tracing.otlp.address={{ required "ERROR: When enabling openTelemetry on tracing, `tracing.openTelemetry.address` is required." .Values.tracing.openTelemetry.address }}"
           {{- range $key, $value := .Values.tracing.openTelemetry.headers }}
-          - "--tracing.openTelemetry.headers.{{ $key }}={{ $value }}"
+          - "--tracing.otlp.headers.{{ $key }}={{ $value }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.insecure }}
-          - "--tracing.openTelemetry.insecure={{ .Values.tracing.openTelemetry.insecure }}"
+          - "--tracing.otlp.insecure={{ .Values.tracing.openTelemetry.insecure }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.path }}
-          - "--tracing.openTelemetry.path={{ .Values.tracing.openTelemetry.path }}"
+          - "--tracing.otlp.path={{ .Values.tracing.openTelemetry.path }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.tls }}
           {{- if .Values.tracing.openTelemetry.tls.ca }}
-          - "--tracing.openTelemetry.tls.ca={{ .Values.tracing.openTelemetry.tls.ca }}"
+          - "--tracing.otlp.tls.ca={{ .Values.tracing.openTelemetry.tls.ca }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.tls.cert }}
-          - "--tracing.openTelemetry.tls.cert={{ .Values.tracing.openTelemetry.tls.cert }}"
+          - "--tracing.otlp.tls.cert={{ .Values.tracing.openTelemetry.tls.cert }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.tls.key }}
-          - "--tracing.openTelemetry.tls.key={{ .Values.tracing.openTelemetry.tls.key }}"
+          - "--tracing.otlp.tls.key={{ .Values.tracing.openTelemetry.tls.key }}"
           {{- end }}
           {{- if .Values.tracing.openTelemetry.tls.insecureSkipVerify }}
-          - "--tracing.openTelemetry.tls.insecureSkipVerify={{ .Values.tracing.openTelemetry.tls.insecureSkipVerify }}"
+          - "--tracing.otlp.tls.insecureSkipVerify={{ .Values.tracing.openTelemetry.tls.insecureSkipVerify }}"
           {{- end }}
           {{- end }}
           {{- if .Values.tracing.openTelemetry.grpc }}
-          - "--tracing.openTelemetry.grpc=true"
+          - "--tracing.otlp.grpc=true"
           {{- end }}
           {{- end }}
 

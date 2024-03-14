@@ -416,28 +416,28 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry=true"
+          content: "--metrics.otlp=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.address=localhost:4318"
+          content: "--metrics.otlp.address=localhost:4318"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addEntryPointsLabels=true"
+          content: "--metrics.otlp.addEntryPointsLabels=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addRoutersLabels=true"
+          content: "--metrics.otlp.addRoutersLabels=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addServicesLabels=true"
+          content: "--metrics.otlp.addServicesLabels=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.explicitBoundaries=0.1,0.3,1.2,5.0"
+          content: "--metrics.otlp.explicitBoundaries=0.1,0.3,1.2,5.0"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.headers.foo=bar"
+          content: "--metrics.otlp.headers.foo=bar"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.headers.test=test"
+          content: "--metrics.otlp.headers.test=test"
   - it: should be possible to disable labels on openTelemetry
     set:
       image:
@@ -451,13 +451,13 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addEntryPointsLabels=false"
+          content: "--metrics.otlp.addEntryPointsLabels=false"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addRoutersLabels=false"
+          content: "--metrics.otlp.addRoutersLabels=false"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.openTelemetry.addServicesLabels=false"
+          content: "--metrics.otlp.addServicesLabels=false"
   - it: should throw and error when open telemetry is enabled without traefik v3
     set:
       image:

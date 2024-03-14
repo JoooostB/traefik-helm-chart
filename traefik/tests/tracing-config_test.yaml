@@ -25,16 +25,16 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry=true"
+          content: "--tracing.otlp=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry.address=localhost:4318"
+          content: "--tracing.otlp.address=localhost:4318"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry.headers.foo=bar"
+          content: "--tracing.otlp.headers.foo=bar"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry.headers.test=test"
+          content: "--tracing.otlp.headers.test=test"
   - it: Minimal config should work
     set:
       image:
@@ -45,10 +45,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry=true"
+          content: "--tracing.otlp=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry.address=localhost:4318"
+          content: "--tracing.otlp.address=localhost:4318"
   - it: Should work with sha set
     set:
       image:
@@ -59,10 +59,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry=true"
+          content: "--tracing.otlp=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.openTelemetry.address=localhost:4318"
+          content: "--tracing.otlp.address=localhost:4318"
   - it: Address is required
     set:
       image:
@@ -72,8 +72,8 @@ tests:
           # no address
           insecure: true
     asserts:
-    - failedTemplate:
-        errorMessage: "ERROR: When enabling openTelemetry on tracing, `tracing.openTelemetry.address` is required."
+      - failedTemplate:
+          errorMessage: "ERROR: When enabling openTelemetry on tracing, `tracing.openTelemetry.address` is required."
   - it: should throw and error when open telemetry is enabled without traefik v3
     set:
       image:
